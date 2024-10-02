@@ -20,6 +20,8 @@ public class CuentaBancariaService {
         return cuentaBancariaRepository.findAll();
     }
 
+
+
     // Obtener una cuenta bancaria por su número de cuenta
     public Optional<CuentaBancaria> getCuentaBancariaByNumeroCuenta(String numeroCuenta) {
         return cuentaBancariaRepository.findByNumeroCuenta(numeroCuenta);

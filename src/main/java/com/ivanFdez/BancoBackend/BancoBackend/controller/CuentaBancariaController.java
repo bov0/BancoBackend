@@ -65,7 +65,6 @@ public class CuentaBancariaController {
 
         UsuarioBanco usuario = usuarioOptional.get();
 
-        // Crear la nueva cuenta bancaria
         CuentaBancaria nuevaCuenta = new CuentaBancaria(numeroCuenta, tipoCuenta, saldo, usuario);
         CuentaBancaria cuentaCreada = cuentaBancariaService.createCuentaBancaria(nuevaCuenta);
 

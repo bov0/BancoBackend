@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -25,11 +26,11 @@ public class UsuarioBanco {
     private String email;
 
     @Column(name = "fecha_creacion", nullable = false)
-    private Date fecha_creacion;
+    private LocalDateTime fecha_creacion;
 
     public UsuarioBanco() {}
 
-    public UsuarioBanco(String username, String password, String email, Date fecha_creacion) {
+    public UsuarioBanco(String username, String password, String email, LocalDateTime fecha_creacion) {
         this.username = username;
         this.password = password;
         this.email = email;

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +46,7 @@ public class UsuarioBancoController {
                                                      @RequestParam String password,
                                                      @RequestParam String email) {
         try {
-            Date fecha_creacion = new Date();
+            LocalDateTime fecha_creacion = LocalDateTime.now();
             UsuarioBanco usuarioBanco = usuarioBancoService.createUsuario(
                     new UsuarioBanco(username, password, email, fecha_creacion)
             );
