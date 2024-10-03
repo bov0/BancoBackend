@@ -7,7 +7,6 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -19,13 +18,13 @@ public class TarjetaCredito {
     private BigInteger id;
 
     @Column(name = "numero_tarjeta", nullable = false, unique = true, length = 16)
-    private String numero_tarjeta;
+    private String numeroTarjeta;
 
     @Column(name = "fecha_vencimiento",nullable = false)
-    private LocalDateTime fecha_vencimiento;
+    private LocalDateTime fechaVencimiento;
 
     @Column(name = "limite_credito", nullable = false, precision = 15, scale = 2)
-    private BigDecimal limite_credito;
+    private BigDecimal limiteCredito;
 
     @ManyToOne
     @JoinColumn(name = "cuenta_id", nullable = false)
@@ -33,10 +32,10 @@ public class TarjetaCredito {
 
     public TarjetaCredito() {}
 
-    public TarjetaCredito(String numero_tarjeta, LocalDateTime fecha_vencimiento, BigDecimal limite_credito,CuentaBancaria cuentaBancaria) {
-        this.numero_tarjeta = numero_tarjeta;
-        this.fecha_vencimiento = fecha_vencimiento;
-        this.limite_credito = limite_credito;
+    public TarjetaCredito(String numeroTarjeta, LocalDateTime fechaVencimiento, BigDecimal limiteCredito, CuentaBancaria cuentaBancaria) {
+        this.numeroTarjeta = numeroTarjeta;
+        this.fechaVencimiento = fechaVencimiento;
+        this.limiteCredito = limiteCredito;
         this.cuentaBancaria = cuentaBancaria;
     }
 }

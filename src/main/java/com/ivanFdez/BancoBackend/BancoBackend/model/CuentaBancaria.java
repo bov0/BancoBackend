@@ -16,14 +16,11 @@ public class CuentaBancaria {
     private BigInteger id;
 
     @Column(name = "numero_cuenta", nullable = false, unique = true, length = 20)
-    private String numero_cuenta;
+    private String numeroCuenta;
 
-    public enum TipoCuenta {
-        AHORRO,
-        CORRIENTE
-    }
-    @Column(name = "tipo_cuenta" , nullable = false)
-    private TipoCuenta tipo_cuenta;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_cuenta", nullable = false)
+    private TipoCuenta tipoCuenta;
 
     @Column(name = "saldo", nullable = false, precision = 15, scale = 2)
     private BigDecimal saldo;
@@ -34,11 +31,15 @@ public class CuentaBancaria {
 
     public CuentaBancaria() {}
 
-    public CuentaBancaria(String numero_cuenta, TipoCuenta tipo_cuenta, BigDecimal saldo, UsuarioBanco usuario) {
-        this.numero_cuenta = numero_cuenta;
-        this.tipo_cuenta = tipo_cuenta;
+    public CuentaBancaria(String numeroCuenta, TipoCuenta tipoCuenta, BigDecimal saldo, UsuarioBanco usuario) {
+        this.numeroCuenta = numeroCuenta;
+        this.tipoCuenta = tipoCuenta;
         this.saldo = saldo;
         this.usuario = usuario;
     }
 
+    public enum TipoCuenta {
+        AHORROS,
+        CORRIENTE
+    }
 }

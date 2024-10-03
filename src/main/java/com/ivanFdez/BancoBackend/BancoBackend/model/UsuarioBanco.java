@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -26,14 +25,14 @@ public class UsuarioBanco {
     private String email;
 
     @Column(name = "fecha_creacion", nullable = false)
-    private LocalDateTime fecha_creacion;
+    private LocalDateTime fechaCreacion;
 
     public UsuarioBanco() {}
 
-    public UsuarioBanco(String username, String password, String email, LocalDateTime fecha_creacion) {
+    public UsuarioBanco(String username, String password, String email, LocalDateTime fechaCreacion) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.fecha_creacion = fecha_creacion;
+        this.fechaCreacion = fechaCreacion;
     }
 }

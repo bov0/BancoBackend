@@ -6,7 +6,6 @@ import com.ivanFdez.BancoBackend.BancoBackend.service.CuentaBancariaService;
 import com.ivanFdez.BancoBackend.BancoBackend.service.TarjetaCreditoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Date;
-import java.math.BigInteger;
 import java.math.BigDecimal;
 
 
@@ -45,7 +42,7 @@ public class TarjetaCreditoController {
     }
 
     @PostMapping(value = "/tarjetasCredito")
-    @Operation(summary = "Crear tarjeta de crédito", tags = {"tarjetas de crédito"})
+    @Operation(summary = "Crear tarjeta de crédito", tags = {"tarjetas de credito"})
     public ResponseEntity<TarjetaCredito> crearTarjetaCredito(@RequestParam(required = false) String numeroTarjeta,
                                                               @RequestParam BigDecimal limiteCredito,
                                                               @RequestParam CuentaBancaria cuentaBancaria) {
@@ -62,7 +59,7 @@ public class TarjetaCreditoController {
         }
 
         // Obtener la cuenta bancaria asociada por ID
-        Optional<CuentaBancaria> cuentaOptional = cuentaBancariaService.getCuentaBancariaByNumeroCuenta(cuentaBancaria.getNumero_cuenta());
+        Optional<CuentaBancaria> cuentaOptional = cuentaBancariaService.getCuentaBancariaByNumeroCuenta(cuentaBancaria.getNumeroCuenta());
         if (cuentaOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Si no se encuentra la cuenta
         }

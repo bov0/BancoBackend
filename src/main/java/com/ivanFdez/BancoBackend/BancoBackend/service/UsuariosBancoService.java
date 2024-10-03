@@ -21,6 +21,8 @@ public class UsuariosBancoService {
         return usuarioBancoRepository.findById(id);
     }
 
+    public Optional<UsuarioBanco> getUsuarioByUsername(String username) { return  usuarioBancoRepository.findByUsername(username);}
+
     public UsuarioBanco createUsuario(UsuarioBanco usuarioBanco) {
         // Verificamos si el username es nulo
         if (usuarioBanco.getUsername() == null) {
@@ -38,5 +40,9 @@ public class UsuariosBancoService {
 
         // Aquí puedes realizar la lógica para guardar el usuario en la base de datos
         return usuarioBancoRepository.save(usuarioBanco);  // Asegúrate de tener un repository configurado
+    }
+
+    public UsuarioBanco updateUsuario(UsuarioBanco usuarioBanco) {
+        return usuarioBancoRepository.save(usuarioBanco);
     }
 }

@@ -53,7 +53,6 @@ public class Transaccion {
         DEPOSITO, RETIRO, PAGO, TRANSFERENCIA
     }
 
-    // Enumeración para sector de la transacción
     public enum Sector {
         COMPRAS, OCIO, TRANSPORTE, RESTAURANTE, SERVICIOS, OTROS
     }

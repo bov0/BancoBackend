@@ -5,7 +5,6 @@ import com.ivanFdez.BancoBackend.BancoBackend.repository.CuentaBancariaRepositor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,11 +32,11 @@ public class CuentaBancariaService {
     }
 
     public CuentaBancaria createCuentaBancaria(CuentaBancaria cuentaBancaria) {
-        if (cuentaBancaria.getNumero_cuenta() == null) {
+        if (cuentaBancaria.getNumeroCuenta() == null) {
             throw new IllegalArgumentException("El numero de cuenta no puede ser nulo");
         }
 
-        if (cuentaBancaria.getTipo_cuenta() == null) {
+        if (cuentaBancaria.getTipoCuenta() == null) {
             throw new IllegalArgumentException("El tipo de cuenta no puede ser nulo");
         }
 
