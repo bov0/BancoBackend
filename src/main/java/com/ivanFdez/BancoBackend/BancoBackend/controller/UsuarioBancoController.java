@@ -1,10 +1,11 @@
 package com.ivanFdez.BancoBackend.BancoBackend.controller;
 
+import com.ivanFdez.BancoBackend.BancoBackend.model.JwtResponse;
+import com.ivanFdez.BancoBackend.BancoBackend.model.LoginRequest;
 import com.ivanFdez.BancoBackend.BancoBackend.model.UsuarioBanco;
 import com.ivanFdez.BancoBackend.BancoBackend.service.UsuariosBancoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,13 +31,25 @@ public class UsuarioBancoController {
         return usuarioBancoService.getAllUsuariosBanco();
     }
 
-    @GetMapping("/usuariosBanco/{id}")
+    @GetMapping("/usuariosBanco/email/{email}")
+    @Operation(summary = "Devuelve el usuario perteneciente al banco con ese email", tags = {"usuarios banco"})
+    public ResponseEntity<UsuarioBanco> getUsuarioBancoByEmail(@PathVariable String email) {
+        Optional<UsuarioBanco> optionalUsuarioBanco = usuarioBancoService.getUsuarioByEmail(email);
+        if (optionalUsuarioBanco.isPresent()) {
+            UsuarioBanco usuarioBanco = optionalUsuarioBanco.get();
+            return new ResponseEntity<>(usuarioBanco, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/usuariosBanco/id/{id}")
     @Operation(summary = "Devuelve el usuario con el id proporcionado perteneciente al banco", tags = {"usuarios banco"})
     public ResponseEntity<UsuarioBanco> getUsuarioBancoById(@PathVariable BigInteger id) {
-        Optional<UsuarioBanco> optionalUsuariosBanco = usuarioBancoService.getUsuarioBancoById(id);
+        Optional<UsuarioBanco> optionalUsuarioBanco = usuarioBancoService.getUsuarioBancoById(id);
 
-        if (optionalUsuariosBanco.isPresent()) {
-            UsuarioBanco usuarioBanco = optionalUsuariosBanco.get();
+        if (optionalUsuarioBanco.isPresent()) {
+            UsuarioBanco usuarioBanco = optionalUsuarioBanco.get();
             return new ResponseEntity<>(usuarioBanco, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,6 +75,7 @@ public class UsuarioBancoController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PutMapping("/usuariosBanco/{id}")
     @Operation(summary = "Editar usuario", tags = {"usuarios banco"})
     public ResponseEntity<UsuarioBanco> actualizarUsuario(@PathVariable("id") BigInteger id,

@@ -26,7 +26,7 @@ public class CuentaBancaria {
     private BigDecimal saldo;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false, unique = true)
     private UsuarioBanco usuario;
 
     public CuentaBancaria() {}

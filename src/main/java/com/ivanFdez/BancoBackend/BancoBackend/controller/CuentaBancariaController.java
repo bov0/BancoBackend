@@ -31,17 +31,22 @@ public class CuentaBancariaController {
     @Operation(summary = "Devuelve todas las cuentas bancarias", tags = {"cuentas bancarias"})
     public List<CuentaBancaria> getAllCuentasBancarias() { return cuentaBancariaService.getAllCuentasBancarias();}
 
-    @GetMapping("/cuentasBancarias/{numeroCuenta}")
-    @Operation(summary = "Devuelve datos de cuenta mediante su numero",tags = {"cuentas bancarias"})
+    @GetMapping("/cuentasBancarias/numero/{numeroCuenta}")
+    @Operation(summary = "Devuelve datos de cuenta mediante su numero", tags = {"cuentas bancarias"})
     public ResponseEntity<CuentaBancaria> getCuentaBancariaByNumeroCuenta(@PathVariable String numeroCuenta) {
         Optional<CuentaBancaria> optionalCuentaBancaria = cuentaBancariaService.getCuentaBancariaByNumeroCuenta(numeroCuenta);
+        return optionalCuentaBancaria.map(cuentaBancaria -> new ResponseEntity<>(cuentaBancaria, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
-        if (optionalCuentaBancaria.isPresent()) {
-            CuentaBancaria cuentaBancaria = optionalCuentaBancaria.get();
-            return new ResponseEntity<>(cuentaBancaria, HttpStatus.OK);
-        } else {
+    @GetMapping("/cuentasBancarias/usuario/{usuarioId}")
+    @Operation(summary = "Devuelve todas las cuentas del usuario con ese id", tags = {"cuentas bancarias"})
+    public ResponseEntity<List<CuentaBancaria>> getAllCuentasBancariasByUsuarioId(@PathVariable BigInteger usuarioId) {
+        List<CuentaBancaria> cuentas = cuentaBancariaService.getCuentasBancariasByUsuarioId(usuarioId);
+
+        if (cuentas.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(cuentas, HttpStatus.OK);
     }
 
     @PostMapping(value = "/cuentasBancarias")

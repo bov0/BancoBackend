@@ -23,6 +23,8 @@ public class UsuariosBancoService {
 
     public Optional<UsuarioBanco> getUsuarioByUsername(String username) { return  usuarioBancoRepository.findByUsername(username);}
 
+    public Optional<UsuarioBanco> getUsuarioByEmail(String email) { return usuarioBancoRepository.findByEmail(email);}
+
     public UsuarioBanco createUsuario(UsuarioBanco usuarioBanco) {
         // Verificamos si el username es nulo
         if (usuarioBanco.getUsername() == null) {

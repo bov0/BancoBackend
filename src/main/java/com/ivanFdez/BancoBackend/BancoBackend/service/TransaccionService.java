@@ -64,6 +64,7 @@ public class TransaccionService {
         }
 
         // Crear la transacción
+        assert tarjetaCredito != null;
         Transaccion nuevaTransaccion = new Transaccion(tipoTransaccion, monto, cuentaBancaria, tarjetaCredito, sector, fecha);
         return transaccionRepository.save(nuevaTransaccion);
     }

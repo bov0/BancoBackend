@@ -1,10 +1,13 @@
 package com.ivanFdez.BancoBackend.BancoBackend.service;
 
 import com.ivanFdez.BancoBackend.BancoBackend.model.CuentaBancaria;
+import com.ivanFdez.BancoBackend.BancoBackend.model.UsuarioBanco;
 import com.ivanFdez.BancoBackend.BancoBackend.repository.CuentaBancariaRepository;
+import com.ivanFdez.BancoBackend.BancoBackend.repository.UsuarioBancoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,15 +16,12 @@ public class CuentaBancariaService {
 
     @Autowired
     private CuentaBancariaRepository cuentaBancariaRepository;
+    private UsuarioBancoRepository usuarioBancoRepository;
 
-    // Obtener todas las cuentas bancarias
     public List<CuentaBancaria> getAllCuentasBancarias() {
         return cuentaBancariaRepository.findAll();
     }
 
-
-
-    // Obtener una cuenta bancaria por su número de cuenta
     public Optional<CuentaBancaria> getCuentaBancariaByNumeroCuenta(String numeroCuenta) {
         return cuentaBancariaRepository.findByNumeroCuenta(numeroCuenta);
     }
@@ -45,5 +45,16 @@ public class CuentaBancariaService {
         }
 
         return cuentaBancariaRepository.save(cuentaBancaria);
+    }
+
+    public List<CuentaBancaria> getCuentasBancariasByUsuarioId(BigInteger usuarioId) {
+        return cuentaBancariaRepository.findByUsuarioId(usuarioId);
+    }
+
+    public CuentaBancaria getCuentaBancariaByUsuarioId(BigInteger usuarioId) {
+        UsuarioBanco usuario = usuarioBancoRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return cuentaBancariaRepository.findByUsuario(usuario)
+                .orElseThrow(() -> new RuntimeException("No se encontró la cuenta bancaria para el usuario proporcionado"));
     }
 }

@@ -10,4 +10,6 @@ public interface UsuarioBancoRepository extends JpaRepository<UsuarioBanco, Long
     Optional<UsuarioBanco> findByUsername(String username);
 
     Optional<UsuarioBanco> findById(BigInteger id);
+
+    Optional<UsuarioBanco> findByEmail(String email);
 }

@@ -2,7 +2,6 @@ package com.ivanFdez.BancoBackend.BancoBackend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -30,9 +29,10 @@ public class Transaccion {
     @JoinColumn(name = "cuenta_id", nullable = true)
     private CuentaBancaria cuentaBancaria;
 
+    // Cambiar el tipo de tarjetaCredito de BigInteger a TarjetaCredito
     @ManyToOne
     @JoinColumn(name = "tarjeta_id", nullable = true)
-    private TarjetaCredito tarjetaCredito;
+    private TarjetaCredito tarjetaCredito; // Corregido
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sector", nullable = false)
@@ -44,7 +44,7 @@ public class Transaccion {
         this.tipoTransaccion = tipoTransaccion;
         this.monto = monto;
         this.cuentaBancaria = cuentaBancaria;
-        this.tarjetaCredito = tarjetaCredito;
+        this.tarjetaCredito = tarjetaCredito; // Corregido
         this.sector = sector;
         this.fecha = fecha;
     }
