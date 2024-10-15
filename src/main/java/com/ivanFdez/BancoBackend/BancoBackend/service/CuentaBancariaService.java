@@ -57,4 +57,8 @@ public class CuentaBancariaService {
         return cuentaBancariaRepository.findByUsuario(usuario)
                 .orElseThrow(() -> new RuntimeException("No se encontró la cuenta bancaria para el usuario proporcionado"));
     }
+
+    public Optional<CuentaBancaria> getCuentaBancariaById(Long cuentaBancariaId) {
+        return cuentaBancariaRepository.findById(cuentaBancariaId);
+    }
 }
