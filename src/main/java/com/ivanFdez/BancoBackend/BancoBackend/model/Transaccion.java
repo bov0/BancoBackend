@@ -29,13 +29,12 @@ public class Transaccion {
     @JoinColumn(name = "cuenta_id", nullable = true)
     private CuentaBancaria cuentaBancaria;
 
-    // Cambiar el tipo de tarjetaCredito de BigInteger a TarjetaCredito
     @ManyToOne
     @JoinColumn(name = "tarjeta_id", nullable = true)
-    private TarjetaCredito tarjetaCredito; // Corregido
+    private TarjetaCredito tarjetaCredito;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sector", nullable = false)
+    @Column(name = "sector", nullable = true)
     private Sector sector;
 
     public Transaccion() {}
@@ -44,7 +43,7 @@ public class Transaccion {
         this.tipoTransaccion = tipoTransaccion;
         this.monto = monto;
         this.cuentaBancaria = cuentaBancaria;
-        this.tarjetaCredito = tarjetaCredito; // Corregido
+        this.tarjetaCredito = tarjetaCredito;
         this.sector = sector;
         this.fecha = fecha;
     }

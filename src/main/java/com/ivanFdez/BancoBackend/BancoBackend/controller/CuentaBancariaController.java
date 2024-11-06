@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 
@@ -75,6 +76,22 @@ public class CuentaBancariaController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cuentaCreada);
     }
+
+    @PutMapping("/cuentasBancarias/{numeroCuenta}")
+    @Operation(summary = "Actualiza parcialmente una cuenta bancaria", tags = {"cuentas bancarias"})
+    public ResponseEntity<CuentaBancaria> actualizarParcialCuenta(
+            @PathVariable String numeroCuenta,
+            @RequestBody CuentaBancaria cuentaBancariaParcial) {
+        try {
+            CuentaBancaria cuentaActualizada = cuentaBancariaService.actualizarParcialCuenta(numeroCuenta, cuentaBancariaParcial);
+            return ResponseEntity.ok(cuentaActualizada);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
 
     // Método para generar un número de cuenta aleatorio de 20 dígitos
     private String generarNumeroCuenta() {

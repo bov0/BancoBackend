@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -60,5 +61,21 @@ public class CuentaBancariaService {
 
     public Optional<CuentaBancaria> getCuentaBancariaById(Long cuentaBancariaId) {
         return cuentaBancariaRepository.findById(cuentaBancariaId);
+    }
+
+    public CuentaBancaria actualizarParcialCuenta(String numeroCuenta, CuentaBancaria cuentaBancariaParcial) {
+        // Buscar la cuenta bancaria existente por número de cuenta
+        CuentaBancaria cuentaExistente = cuentaBancariaRepository.findByNumeroCuenta(numeroCuenta)
+                .orElseThrow(() -> new NoSuchElementException("Cuenta bancaria no encontrada"));
+
+        // Actualizar solo los campos no nulos
+        if (cuentaBancariaParcial.getSaldo() != null) {
+            cuentaExistente.setSaldo(cuentaBancariaParcial.getSaldo());
+        }
+        if (cuentaBancariaParcial.getTipoCuenta() != null) {
+            cuentaExistente.setTipoCuenta(cuentaBancariaParcial.getTipoCuenta());
+        }
+
+        return cuentaBancariaRepository.save(cuentaExistente);
     }
 }

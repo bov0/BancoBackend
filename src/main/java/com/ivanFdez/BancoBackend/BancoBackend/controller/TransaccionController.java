@@ -49,8 +49,8 @@ public class TransaccionController {
     public ResponseEntity<Transaccion> crearTransaccion(@RequestParam Transaccion.TipoTransaccion tipoTransaccion,
                                                         @RequestParam (required = true)BigDecimal monto,
                                                         @RequestParam(required = true) Long cuentaId,
-                                                        @RequestParam(required = true) Long tarjetaId,
-                                                        @RequestParam Transaccion.Sector sector) {
+                                                        @RequestParam(required = false) Long tarjetaId,
+                                                        @RequestParam(required = false) Transaccion.Sector sector) {
         try {
             Transaccion nuevaTransaccion = transaccionService.createTransaccion(tipoTransaccion, monto, cuentaId, tarjetaId, sector);
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevaTransaccion);
